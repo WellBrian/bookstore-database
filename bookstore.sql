@@ -143,3 +143,122 @@ CREATE TABLE order_history (
     FOREIGN KEY (order_id) REFERENCES cust_order(order_id),
     FOREIGN KEY (status_id) REFERENCES order_status(status_id)
 );
+
+
+-- INSERT DATA INTO THE CREATED TABLES
+
+-- book_language
+INSERT INTO book_language (language_name) VALUES 
+('English'), ('Swahili'), ('French'), ('Zulu'), ('Arabic');
+
+-- publisher 
+INSERT INTO publisher (publisher_name, established_date, website) VALUES 
+('Longhorn Publishers', '1965-05-01', 'https://www.longhornpublishers.com'),
+('Pearson Education', '1998-03-14', 'https://www.pearson.com'),
+('Heinemann', '1970-09-20', 'https://www.heinemann.com'),
+('Macmillan', '1950-01-01', 'https://www.macmillan.com'),
+('Oxford University Press', '1900-01-01', 'https://www.oup.com');
+
+-- author
+INSERT INTO author (first_name, last_name, nationality) VALUES 
+('Ngugi', 'Wa Thiongo', 'Kenyan'),
+('Chimamanda', 'Adichie', 'Nigerian'),
+('Wole', 'Soyinka', 'Nigerian'),
+('Athol', 'Fugard', 'South African'),
+('Nawal', 'El Saadawi', 'Egyptian');
+
+-- book
+INSERT INTO book (title, isbn, language_id, publisher_id, num_pages, publication_year, price, stock_quantity) VALUES 
+('Petals of Blood', '9780000001', 1, 1, 432, 1977, 13.99, 20),
+('Half of a Yellow Sun', '9780000002', 1, 2, 448, 2006, 15.99, 30),
+('Ake: The Years of Childhood', '9780000003', 1, 3, 224, 1981, 11.50, 25),
+('Master Harold and the Boys', '9780000004', 1, 4, 96, 1982, 10.00, 18),
+('Woman at Point Zero', '9780000005', 3, 5, 160, 1975, 9.99, 15);
+
+-- book_author
+INSERT INTO book_author (book_id, author_id) VALUES 
+(1, 1), 
+(2, 2), 
+(3, 3), 
+(4, 4), 
+(5, 5);
+
+-- country
+INSERT INTO country (country_name, country_code) VALUES 
+('Kenya', 'KEN'),
+('Nigeria', 'NGA'),
+('South Africa', 'ZAF'),
+('Egypt', 'EGY'),
+('Tanzania', 'TZA');
+
+-- address_status
+INSERT INTO address_status (status_name) VALUES 
+('Current'), 
+('Previous'), 
+('Billing'), 
+('Shipping'), 
+('Old');
+
+-- address
+INSERT INTO address (street_number, street_name, city, state, postal_code, country_id) VALUES 
+('10', 'Moi Avenue', 'Nairobi', 'Nairobi', '00100', 1),
+('5', 'Allen Avenue', 'Lagos', 'Lagos', '100001', 2),
+('22', 'Long Street', 'Cape Town', 'Western Cape', '8001', 3),
+('8', 'Tahrir Square', 'Cairo', 'Cairo', '11511', 4),
+('3', 'Bagamoyo Rd', 'Dar es Salaam', 'Dar', '14111', 5);
+
+-- customer
+INSERT INTO customer (first_name, last_name, email, phone) VALUES 
+('Brian', 'Ouko', 'brian@bookstore.com', '+254700000001'),
+('Amina', 'Chukwu', 'amina@reader.ng', '+234800000002'),
+('Sipho', 'Moyo', 'sipho@za.co', '+277300000003'),
+('Leila', 'Ahmed', 'leila@cairo.egy', '+202000000004'),
+('Juma', 'Mkapa', 'juma@tz.net', '+255600000005');
+
+-- customer_address
+INSERT INTO customer_address (customer_id, address_id, status_id) VALUES 
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1),
+(4, 4, 1),
+(5, 5, 1);
+
+-- shipping_method
+INSERT INTO shipping_method (method_name, cost, delivery_time_days) VALUES 
+('Standard Shipping', 5.00, 5),
+('Express Delivery', 10.00, 2),
+('Same-Day Delivery', 15.00, 1),
+('Pickup from Store', 0.00, 0),
+('Weekend Delivery', 7.50, 3);
+
+-- order_status
+INSERT INTO order_status (status_value) VALUES 
+('Pending'), 
+('Shipped'), 
+('Delivered'), 
+('Cancelled'), 
+('Processing');
+
+-- cust_order
+INSERT INTO cust_order (customer_id, order_date, shipping_address_id, shipping_method_id) VALUES 
+(1, NOW(), 1, 1),
+(2, NOW(), 2, 2),
+(3, NOW(), 3, 3),
+(4, NOW(), 4, 4),
+(5, NOW(), 5, 5);
+
+-- order_line
+INSERT INTO order_line (order_id, book_id, quantity, price_each) VALUES 
+(1, 1, 1, 13.99),
+(2, 2, 2, 15.99),
+(3, 3, 1, 11.50),
+(4, 4, 3, 10.00),
+(5, 5, 1, 9.99);
+
+-- order_history
+INSERT INTO order_history (order_id, status_id) VALUES 
+(1, 1), 
+(2, 2), 
+(3, 3), 
+(4, 4), 
+(5, 5);
