@@ -1,6 +1,6 @@
 -- DATABASE CREATION
-CREATE DATABASE bookstoredb;
-USE bookstoredb;
+CREATE DATABASE bookstore;
+USE bookstore;
 
 -- CORE TABLES
 -- Book language table
