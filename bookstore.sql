@@ -65,7 +65,7 @@ CREATE TABLE book (
     language_id INT,
     publisher_id INT,
     publication_year YEAR,
-    price DECIMAL(10,2),
+    price DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (language_id) REFERENCES book_language(language_id),
     FOREIGN KEY (publisher_id) REFERENCES publisher(publisher_id)
 );
@@ -107,7 +107,7 @@ CREATE TABLE order_line (
     order_id INT,
     book_id INT,
     quantity INT,
-    price_each DECIMAL(10,2),
+    price_each DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES cust_order(order_id),
     FOREIGN KEY (book_id) REFERENCES book(book_id)
 );
