@@ -161,7 +161,7 @@ INSERT INTO publisher (publisher_name, established_date, website) VALUES
 
 -- author
 INSERT INTO author (first_name, last_name, nationality) VALUES 
-('Ngugi', 'Wa Thiongo', 'Kenyan'),
+('Ngugi', 'Wa Thiong''o', 'Kenyan'),
 ('Chimamanda', 'Adichie', 'Nigerian'),
 ('Wole', 'Soyinka', 'Nigerian'),
 ('Athol', 'Fugard', 'South African'),
@@ -262,3 +262,37 @@ INSERT INTO order_history (order_id, status_id) VALUES
 (3, 3), 
 (4, 4), 
 (5, 5);
+
+
+-- Find books by authors
+SELECT b.title, CONCAT(a.first_name, ' ', a.last_name) AS author_name
+FROM book b
+JOIN book_author ba ON b.book_id = ba.book_id
+JOIN author a ON ba.author_id = a.author_id;
+
+-- Find customer order history
+SELECT c.first_name, c.last_name, COUNT(o.order_id) AS total_orders
+FROM customer c
+LEFT JOIN cust_order o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id;
+
+-- Find books with stocks below 20 units including publisher contact info
+SELECT 
+	b.title,
+    b.stock_quantity,
+    p.publisher_name,
+    p.website
+FROM book b
+JOIN publisher p ON b.publisher_id=p.publisher_id
+WHERE b.stock_quantity < 20;
+
+-- Rank authors by total books sold
+SELECT
+    CONCAT(a.first_name, ' ', a.last_name) AS author_name,
+    SUM(ol.quantity) AS total_books_sold
+FROM author a
+JOIN book_author ba ON a.author_id=ba.author_id
+JOIN order_line ol ON ba.book_id=ol.book_id
+GROUP BY a.author_id
+ORDER BY total_books_sold DESC;
+
