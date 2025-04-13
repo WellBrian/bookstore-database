@@ -2,6 +2,40 @@
 CREATE DATABASE bookstore;
 USE bookstore;
 
+-- USER MANAGEMENT SETUP
+-- Create user accounts
+-- Group leader (full access)
+CREATE USER 'group_leader'@'localhost' IDENTIFIED BY 'Leaderpass123';
+
+-- Database designer 1 (schema modification priviledges)
+CREATE USER 'designer1'@'%' IDENTIFIED BY 'Designer123';
+
+-- Database designer 2 (schema modification priviledges)
+CREATE USER 'designer2'@'%' IDENTIFIED BY 'Designer234';
+
+-- ROLE-BASED PRIVILEGES
+-- Group leader privileges (full control)
+GRANT ALL PRIVILEGES ON bookstore.* TO 'group_leader'@'localhost';
+
+-- Database designer privileges (schema modification)
+GRANT CREATE, ALTER, DROP, INDEX, REFERENCES ON bookstore.* TO 
+'designer1'@'%', 'designer2'@'%';
+
+-- Allow data manipulation
+GRANT SELECT, INSERT, UPDATE, DELETE ON bookstore.* TO 
+'designer1'@'%', 'designer2'@'%';
+
+-- Verification queries
+-- Show privileges for group leader
+SHOW GRANTS FOR 'group_leader'@'localhost';
+
+-- Show privileges for designer 1 and 2
+SHOW GRANTS FOR 'designer1'@'%';
+SHOW GRANTS FOR 'designer2'@'%';
+
+
+
+
 -- CORE TABLES
 -- Book language table
 CREATE TABLE book_language (
